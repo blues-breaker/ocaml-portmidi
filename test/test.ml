@@ -11,8 +11,8 @@ type mode = Input | Output
 let get_device m =
     print_endline "Select device:";
     let print_device i = function
-        | Input, {input=true; name=n}
-        | Output, {output=true; name=n} ->
+        | Input, {input=true; name=n; _}
+        | Output, {output=true; name=n; _} ->
                 print_int i;
                 print_endline (" " ^ n);
         | _ -> ()
@@ -28,7 +28,7 @@ let get_device m =
 let test_input () =
     let d = get_device Input in
     let st = open_input d 8 in
-    let buf = Array.create 1 {message=Int32.zero; timestamp=Int32.zero} in
+    let buf = Array.make 1 {message=Int32.zero; timestamp=Int32.zero} in
     let rec loop () =
         let _ = match poll st with
         | true -> ignore (read_stream st buf 0 1);

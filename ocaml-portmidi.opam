@@ -1,0 +1,15 @@
+opam-version: "2.0"
+name: "ocaml-portmidi"
+version: "0.0.2"
+synopsis: "OCaml bindings to portmidi"
+description: """
+OCaml bindings to portmidi
+"""
+maintainer: "Niki Yoshiuchi <aplusbi@gmail.com>"
+authors: "Niki Yoshiuchi <aplusbi@gmail.com>"
+license: "LGPL-2.1 with OCaml linking exception"
+homepage: "https://github.com/aplusbi/ocaml-portmidi"
+bug-reports: "https://github.com/aplusbi/ocaml-portmidi/issues"
+#dev-repo: "https://github.com/aplusbi/ocaml-portmidi.git"
+depends: [ "ocaml" "ocamlfind" "dune" "odoc" ]
+build: ["dune" "build" "-p" name]

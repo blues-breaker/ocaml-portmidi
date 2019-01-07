@@ -1,0 +1,8 @@
+(library
+ (name portmidi)
+ (public_name ocaml-portmidi)
+ (libraries unix)
+ (modules portmidi)
+ (c_names         portmidi_stubs)
+ (c_flags         (-pedantic -Wno-long-long))
+ (c_library_flags (-lportmidi -lporttime)))

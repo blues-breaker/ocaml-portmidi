@@ -1,10 +1,8 @@
-(**
-* Bindings for the portmidi library.
-*
-* @author Niki Yoshiuchi
-*)
+(**Bindings for the portmidi library. *)
+(** @author Niki Yoshiuchi *)
 
 (** {2 Exceptions} *)
+
 (** Types of errors *)
 type error =
     PmHostError
@@ -18,19 +16,19 @@ type error =
     | PmBufferMaxSize
     | PmUnkown
 
-(** An error occured.  Use [string_of_error] to get a description of the
-  * error. *)
+(** An error occured.  Use [string_of_error] to get a description of the error. *)
 exception Error of error
 
 (** Get a description of an error. *)
 external string_of_error : error -> string = "caml_pm_get_error_text"
 
 (** {2 General} *)
+
 (** Initialize the portmidi library.  Call this before opening any streams *)
-external init : unit -> unit = "caml_pm_initialize" "noalloc"
+external init : unit -> unit = "caml_pm_initialize" [@@noalloc]
 
 (** Close the library *)
-external terminate : unit -> unit = "caml_pm_terminate" "noalloc"
+external terminate : unit -> unit = "caml_pm_terminate" [@@noalloc]
 
 (** {2 Devices} *)
 
@@ -45,15 +43,15 @@ type device_info = {
 }
 
 (** [count_devices ()] returns the number of MIDI devices available *)
-external count_devices : unit -> int = "caml_pm_count_devices" "noalloc"
+external count_devices : unit -> int = "caml_pm_count_devices" [@@noalloc]
 
 (** [get_default_input_device_id ()] returns the default input MIDI device *)
 external get_default_input_device_id : unit -> int
-  = "caml_pm_get_default_input_device_id" "noalloc"
-  
+  = "caml_pm_get_default_input_device_id" [@@noalloc]
+
 (** [get_default_output_device_id ()] returns the default output MIDI device *)
 external get_default_output_device_id : unit -> int
-  = "caml_pm_get_default_output_device_id" "noalloc"
+  = "caml_pm_get_default_output_device_id" [@@noalloc]
 
 (** [get_device_info id] returns a [device_info] record for device [id] *)
 external get_device_info : int -> device_info = "caml_pm_get_device_info"
@@ -132,6 +130,7 @@ external write_sysex : stream -> Int32.t -> string -> unit
 module Time :
   sig
     (** {2 Exceptions} *)
+
     (** Types of errors *)
     type error =
         PtHostError  (** a system-specific error occurred *)
@@ -144,16 +143,17 @@ module Time :
     exception Error of error
 
     (** {2 General} *)
+
     (** [start res] starts the timer with  resolution [res]
      * in milliseconds. *)
-    external start : int -> unit = "caml_pt_start" "noalloc"
+    external start : int -> unit = "caml_pt_start" [@@noalloc]
 
     (** Stop the timer *)
-    external stop : unit -> unit = "caml_pt_stop" "noalloc"
-    
+    external stop : unit -> unit = "caml_pt_stop" [@@noalloc]
+
     (** Get the time in milliseconds *)
-    external time : unit -> Int32.t = "caml_pt_time" "noalloc"
+    external time : unit -> Int32.t = "caml_pt_time" [@@noalloc]
 
     (** [sleep time] sleeps for [time] milliseconds *)
-    external sleep : int -> unit = "caml_pt_sleep" "noalloc"
+    external sleep : int -> unit = "caml_pt_sleep" [@@noalloc]
   end

@@ -18,12 +18,12 @@ let () =
 
 external string_of_error : error -> string = "caml_pm_get_error_text"
 
-external init : unit -> unit = "caml_pm_initialize" "noalloc"
+external init : unit -> unit = "caml_pm_initialize" [@@noalloc]
 
-external terminate : unit -> unit = "caml_pm_terminate" "noalloc"
+external terminate : unit -> unit = "caml_pm_terminate" [@@noalloc]
 
 type device_info = {
-    struct_version : int; (**< this internal structure version *) 
+    struct_version : int; (**< this internal structure version *)
     interf : string; (**< underlying MIDI API, e.g. MMSystem or DirectX *)
     name : string;   (**< device name, e.g. USB MidiSport 1x1 *)
     input : bool; (**< true iff input is available *)
@@ -31,13 +31,13 @@ type device_info = {
     opened : bool (**< used by generic PortMidi code to do error checking on arguments *)
 }
 
-external count_devices : unit -> int = "caml_pm_count_devices" "noalloc"
+external count_devices : unit -> int = "caml_pm_count_devices" [@@noalloc]
 
 external get_default_input_device_id : unit -> int =
-    "caml_pm_get_default_input_device_id" "noalloc"
+    "caml_pm_get_default_input_device_id" [@@noalloc]
 
 external get_default_output_device_id : unit -> int =
-    "caml_pm_get_default_output_device_id" "noalloc"
+    "caml_pm_get_default_output_device_id" [@@noalloc]
 
 external get_device_info : int -> device_info = "caml_pm_get_device_info"
 
@@ -57,7 +57,7 @@ external close : stream -> unit = "caml_pm_close"
 
 type event = {
     message : Int32.t;
-    timestamp : Int32.t 
+    timestamp : Int32.t
 }
 
 let message status data1 data2 =
@@ -87,18 +87,18 @@ external write_sysex : stream -> Int32.t -> string -> unit = "caml_pm_write_syse
 
 module Time = struct
     type error =
-        PtHostError 
-        | PtAlreadyStarted 
+        PtHostError
+        | PtAlreadyStarted
         | PtAlreadyStopped
         | PtInsufficientMemory
-        | PtUnkown 
+        | PtUnkown
 
     exception Error of error
-    external start : int -> unit = "caml_pt_start" "noalloc"
+    external start : int -> unit = "caml_pt_start" [@@noalloc]
 
-    external stop : unit -> unit = "caml_pt_stop" "noalloc"
+    external stop : unit -> unit = "caml_pt_stop" [@@noalloc]
 
-    external time : unit -> Int32.t = "caml_pt_time" "noalloc"
+    external time : unit -> Int32.t = "caml_pt_time" [@@noalloc]
 
-    external sleep : int -> unit = "caml_pt_sleep" "noalloc"
+    external sleep : int -> unit = "caml_pt_sleep" [@@noalloc]
 end

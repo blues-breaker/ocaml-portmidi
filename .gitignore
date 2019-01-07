@@ -1,3 +1,8 @@
+Makefile
+configure
+myocamlbuild.ml
+setup.data
+setup.ml
 _build/
 setup.log
 *.o
@@ -9,3 +14,5 @@ setup.log
 *.swp
 *.byte
 *.native
+*.install
+.merlin
